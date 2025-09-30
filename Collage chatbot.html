@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>College Webpage</title>
+  <style>
+    /* Reset */
+    * {margin:0; padding:0; box-sizing:border-box;}
+    body {font-family: 'Segoe UI', sans-serif; line-height:1.6; color:#333;}
+    a {text-decoration:none;}
+
+    /* Navbar */
+    nav {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      background: #1e3a8a;
+      padding: 1em 2em;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    nav .logo {color:#fff; font-size:1.5em; font-weight:bold;}
+    nav ul {list-style:none; display:flex; flex-wrap: wrap;}
+    nav ul li {margin-left:20px;}
+    nav ul li a {color:#fff; font-weight:500; transition:0.3s;}
+    nav ul li a:hover {color:#fbbf24;}
+
+    /* Hero */
+    header {
+      background: linear-gradient(rgba(30,58,138,0.5), rgba(30,58,138,0.5)),
+                  url('https://images.unsplash.com/photo-1509062522246-3755977927d7') no-repeat center center/cover;
+      height: 80vh;
+      color:white;
+      display:flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding:2em;
+    }
+    header h1 {font-size:3em; margin-bottom:0.5em;}
+    header p {font-size:1.2em; max-width:600px; margin-bottom:1.5em;}
+    .btn-primary {
+      background:#fbbf24; color:#000; padding:0.8em 1.5em;
+      border:none; border-radius:5px; font-size:1em;
+      cursor:pointer; display:inline-block; transition:0.3s;
+    }
+    .btn-primary:hover {background:#f59e0b;}
+
+    /* Sections */
+    section {padding:5em 2em;}
+    #about {background:#f9fafb; text-align:center;}
+    #about h2 {margin-bottom:1em; font-size:2em;}
+    #about p {max-width:800px; margin:0 auto 2em;}
+    .features {display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:2em; margin-top:2em;}
+    .card {background:#fff; padding:2em; border-radius:10px; box-shadow:0 4px 10px rgba(0,0,0,0.1);}
+    .card h3 {font-size:1.4em; margin-bottom:0.5em;}
+    .emoji {font-size:2em; display:block; margin-bottom:0.5em;}
+
+    #feedback {background:#eef2ff; text-align:center;}
+    #feedback h2 {margin-bottom:1em;}
+    #feedback textarea {width:100%; max-width:600px; height:120px; padding:1em; border:1px solid #ccc; border-radius:8px;}
+    #feedback button {margin-top:1em;}
+
+    #contact {background:#1e3a8a; color:white; text-align:center;}
+    #contact h2 {margin-bottom:1em;}
+    #contact p {margin:0.3em 0;}
+
+    /* Footer */
+    footer {background:#111827; color:white; padding:2em; text-align:center;}
+
+    /* Modals */
+    .modal {
+      display:none;
+      position:fixed;
+      top:0; left:0;
+      width:100%; height:100%;
+      background:rgba(0,0,0,0.6);
+      justify-content:center;
+      align-items:center;
+      padding:1em;
+      overflow-y:auto;
+      z-index:2000;
+    }
+    .modal:target {display:flex;}
+    .modal-content {
+      background: #fff;
+      padding: 2.5em 2em;
+      border-radius: 12px;
+      width: 450px;
+      max-width: 90%;
+      position: relative;
+      text-align: left;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      animation: slideDown 0.4s ease;
+    }
+    @keyframes slideDown {
+      from { transform: translateY(-50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    .modal-content h3 {margin-bottom:1em;}
+    .modal-content input, .modal-content textarea {
+      width: 100%;
+      padding: 0.9em;
+      margin: 0.5em 0 1.2em;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1em;
+    }
+    .modal-content button, .modal-content a.btn-primary {
+      width: 100%;
+      padding: 0.8em;
+      font-size: 1em;
+      border-radius: 6px;
+    }
+    .close {
+      position:absolute;
+      top:12px; right:15px;
+      font-size:1.5em; font-weight:bold;
+      color:#111827; transition:0.3s;
+    }
+    .close:hover {color:#f59e0b;}
+
+    /* Smooth Scroll */
+    html {scroll-behavior:smooth;}
+
+    /* Responsive adjustments */
+    @media(max-width:600px){
+      nav ul li {margin-left:10px;}
+      header h1 {font-size:2em;}
+      header p {font-size:1em;}
+      .card {padding:1.5em;}
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav>
+    <div class="logo">College Portal</div>
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#feedback">Feedback</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="#loginModal">Login</a></li>
+      <li><a href="#sentimentModal">Sentiment</a></li>
+      <li><a href="#ttsModal">Text-to-Speech</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero Section -->
+  <header id="home">
+    <h1>Welcome to the College Webpage</h1>
+    <p>A modern website with navigation, popups, and interactive tools.</p>
+    <a href="#about" class="btn-primary">Learn More</a>
+  </header>
+
+  <!-- About Section -->
+  <section id="about">
+    <h2>About Us</h2>
+    <p>We provide a professional college portal with utilities like login, sentiment analysis, text-to-speech, and feedback, designed for easy use and accessibility.</p>
+    <div class="features">
+      <div class="card"><span class="emoji">🎨</span><h3>Modern Design</h3><p>Clean, responsive layout with smooth navigation and visual appeal.</p></div>
+      <div class="card"><span class="emoji">💡</span><h3>Interactive Features</h3><p>Login, sentiment analyzer, and text-to-speech tools integrated seamlessly.</p></div>
+      <div class="card"><span class="emoji">📱</span><h3>Responsive Layout</h3><p>Optimized for both desktop and mobile devices.</p></div>
+    </div>
+  </section>
+
+  <!-- Feedback Section -->
+  <section id="feedback">
+    <h2>Feedback</h2>
+    <p>We value your thoughts and suggestions. Please share your feedback below:</p>
+    <textarea placeholder="Write your feedback here..."></textarea>
+    <br>
+    <button class="btn-primary">Submit</button>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact">
+    <h2>Contact Us</h2>
+    <p>Email: support@college.edu</p>
+    <p>Phone: +91 98765 43210</p>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 College Portal. All rights reserved.</p>
+  </footer>
+
+  <!-- Login Modal -->
+  <div id="loginModal" class="modal">
+    <div class="modal-content">
+      <a href="#" class="close">&times;</a>
+      <h3>Login</h3>
+      <input type="text" placeholder="Username">
+      <input type="password" placeholder="Password">
+      <button class="btn-primary">Login</button>
+    </div>
+  </div>
+
+  <!-- Sentiment Modal -->
+  <div id="sentimentModal" class="modal">
+    <div class="modal-content">
+      <a href="#" class="close">&times;</a>
+      <h3>Sentiment Analyzer</h3>
+      <textarea placeholder="Type your text..."></textarea>
+      <button class="btn-primary">Analyze</button>
+    </div>
+  </div>
+
+  <!-- Text-to-Speech Modal -->
+  <div id="ttsModal" class="modal">
+    <div class="modal-content">
+      <a href="#" class="close">&times;</a>
+      <h3>Text to Speech</h3>
+      <textarea placeholder="Enter text to speak..."></textarea>
+      <button class="btn-primary">Speak</button>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script>
+    // Text-to-Speech
+    const ttsModal = document.querySelector("#ttsModal");
+    const ttsButton = ttsModal.querySelector("button");
+    const ttsTextarea = ttsModal.querySelector("textarea");
+
+    ttsButton.addEventListener("click", () => {
+      const text = ttsTextarea.value;
+      if(text.trim() !== "") {
+        const utterance = new SpeechSynthesisUtterance(text);
+        speechSynthesis.speak(utterance);
+      } else {
+        alert("Please enter some text to speak!");
+      }
+    });
+
+    // Simple Sentiment Analyzer
+    const sentimentModal = document.querySelector("#sentimentModal");
+    const sentimentButton = sentimentModal.querySelector("button");
+    const sentimentTextarea = sentimentModal.querySelector("textarea");
+
+    const positiveWords = ["good","happy","great","awesome","excellent","love","nice","amazing"];
+    const negativeWords = ["bad","sad","terrible","hate","awful","poor","horrible"];
+
+    sentimentButton.addEventListener("click", () => {
+      const text = sentimentTextarea.value.toLowerCase();
+      if(text.trim() === "") { alert("Please enter text to analyze!"); return; }
+
+      let score = 0;
+      positiveWords.forEach(word => { if(text.includes(word)) score++; });
+      negativeWords.forEach(word => { if(text.includes(word)) score--; });
+
+      let sentiment = "Neutral";
+      if(score > 0) sentiment = "Positive 😊";
+      else if(score < 0) sentiment = "Negative 😞";
+
+      alert("Sentiment: " + sentiment);
+    });
+  </script>
+<script>
+  window.watsonAssistantChatOptions = {
+    integrationID: "3e096423-0a46-4900-a130-20875ab6fd5e", // The ID of this integration.
+    region: "au-syd", // The region your integration is hosted in.
+    serviceInstanceID: "6f398c8d-1330-4791-8a19-28fc2c9e03a0", // The ID of your service instance.
+    onLoad: async (instance) => { await instance.render(); }
+  };
+  setTimeout(function(){
+    const t=document.createElement('script');
+    t.src="https://web-chat.global.assistant.watson.appdomain.cloud/versions/" + (window.watsonAssistantChatOptions.clientVersion || 'latest') + "/WatsonAssistantChatEntry.js";
+    document.head.appendChild(t);
+  });
+</script>
+</body>
+</html>
